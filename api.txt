@@ -1,0 +1,89 @@
+<<login api>>
+request >>  {"username":"ahmed","password":"123456","email":"ahmed@yahoo.com"}
+response >> 
+{
+    "status": 1,
+    "message": "Welcome !", 
+    "user": {
+        "user_id": 1,
+        "user_name": "ahmed",
+        "user_email": "ahmed@yahoo.com"
+    }
+}
+===============
+message will return error like wrong email or password
+status 1 >> for success
+status 0 >> for fail and return error in message
+================================
+<< register api>>
+request >> {"username":"ahmed","password":"123456","email":"ahmed2@yahoo.com"}
+respose >>
+{
+    "status": 1,
+    "message": "User Registerd Successfully"
+}
+=========
+in case of error status = 0
+and message return error ex:
+====
+{"username":"ahmed","password":"123456","email":"ahmed2@yahoo.com"} 
+=====
+{
+    "status": 0,
+    "message": "Email Already Registerd"
+}
+=================================
+<< Bind card api >>
+request >> {"userid":2, "password":"123456", "qrcode":"999999999"}
+response 0>>
+{
+    "status": 0,
+    "message": "Card Already Binded"	
+}
+response 1>>
+{
+    "status": 1,
+    "message": "Card Added Successfully"	
+}
+response 2>>
+{
+    "status": 2,
+    "message": "wrong password"	
+}
+response 3>>
+{
+    "status": 3,
+    "message": "Invalid Card"	
+}
+=========================
+<< My Cards >>
+request >> {"userid":2}
+response >>
+[{
+"card_id":12345666
+},
+{
+"card_id":123456888
+},
+{
+"card_id":123456777
+}
+]
+============================================
+<< unbind cards >>
+request >> {"userid":2, "password":"123456", "card_id":99999}
+response >> 
+{
+    "status": 0,
+    "message": "Failed To Unbind Card"	
+}
+response 1>>
+{
+    "status": 1,
+    "message": "Card Unbinded Successfully"	
+}
+note >> you should check if the user have this card and password is correct before unbind it
+===========================================
+
+ 
+
