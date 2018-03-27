@@ -12,18 +12,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.madara.training.fragments.GetPassword;
 import com.google.android.gms.vision.barcode.Barcode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MyCards extends AppCompatActivity {
-    final ProgressDialog progressDialog = new ProgressDialog(MyCards.this,
-            R.style.AppTheme_Dark_Dialog);
+    private final String TAG = "MyCards";
     @BindView(R.id.btn_bindcard)
     Button _btn_bind;
     public static final int REQUEST_CODE = 100;
     public static final int PERMISSION_REQUEST = 200;
+    private String mBarcode;
+    private String mUserPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,11 +56,26 @@ public class MyCards extends AppCompatActivity {
 //                    }
 //                });
                 Toast.makeText(this, barcode.displayValue, Toast.LENGTH_SHORT).show();
-                progressDialog.setIndeterminate(true);
-                progressDialog.setMessage("Binding...");
-                progressDialog.show();
+                mBarcode = barcode.displayValue;
+                GetPassword getPassword = new GetPassword();
+                getPassword.show(getFragmentManager(),"GetPassword");
 
             }
         }
     }
+    public void start(String password){
+        if(!password.equals("")){
+            Toast.makeText(this,"Empty Password!",Toast.LENGTH_SHORT).show();
+        }
+        else {
+            final ProgressDialog progressDialog = new ProgressDialog(MyCards.this);
+            mUserPassword = password;
+            progressDialog.setIndeterminate(true);
+            progressDialog.setMessage("Binding...");
+            progressDialog.show();
+            Toast.makeText(this, mUserPassword + " " + mBarcode, Toast.LENGTH_LONG).show();
+        }
+    }
+
+
 }

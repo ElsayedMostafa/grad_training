@@ -33,7 +33,7 @@
             android:name=".LoginActivity"
             android:label="Login" />
         <activity android:name=".MyCards" />
-        <activity android:name=".QRScanner"></activity>
+        <activity android:name=".QRScanner" />
     </application>
 
 </manifest>
