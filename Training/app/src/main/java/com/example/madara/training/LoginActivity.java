@@ -67,8 +67,7 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
                 _loginButton.setEnabled(false);
-                final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
-                        R.style.AppTheme_Dark_Dialog);
+                final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
                 progressDialog.setIndeterminate(true);
                 progressDialog.setMessage("Authenticating...");
                 progressDialog.show();
@@ -89,6 +88,7 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, response.body().message, Toast.LENGTH_SHORT).show();
                             user.username = response.body().user.user_name;
                             user.id = response.body().user.id;
+                            user.email = response.body().user.user_email;
                             Session.getInstance().startSession(user);
                             Intent goToMain = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(goToMain);
@@ -104,7 +104,8 @@ public class LoginActivity extends AppCompatActivity {
 
                      }
                      catch (Exception e){
-                            Toast.makeText(LoginActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Failed" + e.toString() , Toast.LENGTH_LONG).show();
+                            Log.e(TAG,e.toString());
                             _loginButton.setEnabled(true);
                             progressDialog.cancel();
                         }

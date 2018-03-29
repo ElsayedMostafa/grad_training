@@ -7,8 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.example.madara.training.MyCards;
 import com.example.madara.training.R;
@@ -25,10 +25,10 @@ public class GetPassword extends DialogFragment {
     private static final String TAG = "GetPasswordFragment";
     @BindView(R.id.et_get_password)
     EditText _password;
-    @BindView(R.id.tv_action_ok)
-    TextView _ok;
-    @BindView(R.id.tv_action_cancel)
-    TextView _cancel;
+    @BindView(R.id.btn_action_ok)
+    Button _ok;
+    @BindView(R.id.btn_action_cancel)
+    Button _cancel;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -38,19 +38,18 @@ public class GetPassword extends DialogFragment {
         return view;
     }
 
-    @OnClick({R.id.tv_action_cancel, R.id.tv_action_ok})
+    @OnClick({R.id.btn_action_cancel, R.id.btn_action_ok})
     public void onClick(View view){
         switch (view.getId()) {
-            case R.id.tv_action_cancel:
+            case R.id.btn_action_cancel:
                 Log.d(TAG, "onClick: closing dialog");
                 getDialog().dismiss();
                 break;
-            case R.id.tv_action_ok:
+            case R.id.btn_action_ok:
                 String password = _password.getText().toString();
                 getDialog().dismiss();
                 MyCards myCards = (MyCards) getActivity();
-                myCards.start(password);
-
+                myCards.bindNewCard(password);
                 break;
         }
 

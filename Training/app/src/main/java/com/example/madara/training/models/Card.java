@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by madara on 3/27/18.
  */
 
-public class BindCard {
+public class Card {
     @SerializedName("user_id")
     public int id;
     @SerializedName("password")

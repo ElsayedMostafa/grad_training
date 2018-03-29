@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff"
+    android:paddingTop="4dp"
+    android:layout_marginBottom="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <ImageView
+            android:id="@+id/img_rfid_logo"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/rfid" />
+
+        <TextView
+            android:id="@+id/tv_card_num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="18dp"
+            android:layout_toEndOf="@+id/img_rfid_logo"
+            android:layout_toRightOf="@id/img_rfid_logo"
+            android:textSize="20sp"
+            tools:text="1514128888958958" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

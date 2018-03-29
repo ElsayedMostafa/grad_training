@@ -34,7 +34,7 @@ and message return error ex:
 }
 =================================
 << Bind card api >>
-request >> {"userid":2, "password":"123456", "qrcode":"999999999"}
+request >> {"user_id":2, "password":"123456", "qrcode":"999999999"}
 response 0>>
 {
     "status": 0,
@@ -71,7 +71,7 @@ response >>
 ]
 ============================================
 << unbind cards >>
-request >> {"userid":2, "password":"123456", "card_id":99999}
+request >> {"user_id":2, "password":"123456", "card_id":99999}
 response >> 
 {
     "status": 0,
