@@ -34,7 +34,6 @@ public class GetPassword extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_get_password,container,false);
         ButterKnife.bind(this,view);
-
         return view;
     }
 
@@ -49,10 +48,12 @@ public class GetPassword extends DialogFragment {
                 String password = _password.getText().toString();
                 getDialog().dismiss();
                 MyCards myCards = (MyCards) getActivity();
-                myCards.bindNewCard(password);
+                boolean c = getArguments().getBoolean("num");
+                myCards.sendPassword(password,c);
                 break;
         }
 
     }
+
 
 }

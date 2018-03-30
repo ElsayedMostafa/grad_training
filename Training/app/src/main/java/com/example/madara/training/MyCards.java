@@ -14,7 +14,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -28,6 +27,7 @@ import com.example.madara.training.utils.Session;
 import com.example.madara.training.webservices.WebService;
 import com.google.android.gms.vision.barcode.Barcode;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -42,7 +42,7 @@ public class MyCards extends AppCompatActivity {
     @BindView(R.id.btn_bindcard)
     Button _btn_bind;
     @BindView(R.id.recyclerView_card)
-    RecyclerView _recyclerView;
+    RecyclerView _recyclerCardView;
     public static final int REQUEST_CODE = 100;
     public static final int PERMISSION_REQUEST = 200;
     private String mBarcode;
@@ -50,6 +50,7 @@ public class MyCards extends AppCompatActivity {
     private CardAdapter cardAdapter;
     private List<Rfid> cards;
     private Call<List<Rfid>> getCardsCall;
+    private  int position;
     ItemTouchHelper.SimpleCallback swipChatRoomCallBack = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
 
         @Override
@@ -60,12 +61,18 @@ public class MyCards extends AppCompatActivity {
         @Override
         public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
             // get adapter position
-            final int position = viewHolder.getAdapterPosition();
+             position = viewHolder.getAdapterPosition();
             // get chat room id from chat rooms list depedning on position
             //int cardID = Integer.parseInt(cards.get(position).getId());
-            cards.remove(position);
+            GetPassword getPassword = new GetPassword();
+            Bundle args = new Bundle();
+            args.putInt("num", 0);
+            getPassword.setArguments(args);
+            getPassword.show(getFragmentManager(),"GetPassword");
+            //cards.remove(position);
             // notify adapter that chat room deleted so its delete it
-            cardAdapter.notifyItemRemoved(position);
+            //cardAdapter.notifyItemRemoved(position);
+
             // start Retrofit call to delete chat room
 //            WebService.getInstance().getApi().deleteCard(cardID).enqueue(new Callback<MainResponse>() {
 //                @Override
@@ -92,6 +99,7 @@ public class MyCards extends AppCompatActivity {
 //
 //                }
 //            });
+
         }
 
 
@@ -106,7 +114,7 @@ public class MyCards extends AppCompatActivity {
                 Paint p = new Paint();
                 // if swiping to left dx will < 0 so we do what we want
                 if (dX >= 0) {
-                    Log.e(TAG,"yes");
+                    //Log.e(TAG,"yes");
                     // set color for paint red color
                     p.setColor(Color.parseColor("#ED1220"));
                     // draw rectangle depending on the item view ends
@@ -131,17 +139,17 @@ public class MyCards extends AppCompatActivity {
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST);
         }
-        _recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        cards = new ArrayList<Rfid>();
-//        cards.add(new Rfid("126578963214532"));
-//        cards.add(new Rfid("336698587544221"));
-//        cards.add(new Rfid("569874123655879"));
-//        _recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        cardAdapter = new CardAdapter(cards,MyCards.this);
-//        _recyclerView.setAdapter(cardAdapter);
-        getCards();
+        _recyclerCardView.setLayoutManager(new LinearLayoutManager(this));
+        cards = new ArrayList<Rfid>();
+        cards.add(new Rfid("126578963214532"));
+        cards.add(new Rfid("336698587544221"));
+        cards.add(new Rfid("569874123655879"));
+        _recyclerCardView.setLayoutManager(new LinearLayoutManager(this));
+        cardAdapter = new CardAdapter(cards,MyCards.this);
+        _recyclerCardView.setAdapter(cardAdapter);
+        //getCards();
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipChatRoomCallBack);
-        itemTouchHelper.attachToRecyclerView(_recyclerView);
+        itemTouchHelper.attachToRecyclerView(_recyclerCardView);
 
 
         _btn_bind.setOnClickListener(new View.OnClickListener() {
@@ -167,12 +175,15 @@ public class MyCards extends AppCompatActivity {
                 //Toast.makeText(this, barcode.displayValue, Toast.LENGTH_SHORT).show();
                 mBarcode = barcode.displayValue;
                 GetPassword getPassword = new GetPassword();
+                Bundle args = new Bundle();
+                args.putInt("num", 1);
+                getPassword.setArguments(args);
                 getPassword.show(getFragmentManager(),"GetPassword");
 
             }
         }
     }
-    public void bindNewCard(String password){
+    private void bindNewCard(String password){
         if(password.isEmpty()){
             Toast.makeText(this,"Empty Password !",Toast.LENGTH_SHORT).show();
         }
@@ -222,7 +233,7 @@ public class MyCards extends AppCompatActivity {
 
         }
     }
-    public void getCards(){
+    private void getCards(){
         final ProgressDialog progressDialog = new ProgressDialog(MyCards.this);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Geting cards...");
@@ -236,7 +247,7 @@ public class MyCards extends AppCompatActivity {
                 cards = response.body();
                 //Log.e(TAG,cards.toString());
                 cardAdapter = new CardAdapter(cards,MyCards.this);
-                _recyclerView.setAdapter(cardAdapter);
+                _recyclerCardView.setAdapter(cardAdapter);
                 progressDialog.cancel();
             }
 
@@ -253,5 +264,61 @@ public class MyCards extends AppCompatActivity {
         super.onDestroy();
         //mBindCardCall.cancel();
     }
+public void sendPassword(String pass ,boolean c){
+        if (c){
+            bindNewCard(pass);
+        }
+        else{
+            removeCard(pass);
+        }
+}
+private void removeCard(String password){
+    if(password.isEmpty()){
+        Toast.makeText(this,"Empty Password !",Toast.LENGTH_SHORT).show();
+        //_recyclerCardView.setAdapter(cardAdapter);
+        return;
+    }
+    else {
+        final ProgressDialog progressDialog = new ProgressDialog(MyCards.this);
+        mUserPassword = password;
+        final Card card = new Card();
+        card.id = Session.getInstance().getUser().id;
+        card.password = mUserPassword;
+        card.qrcode = cards.get(position).getId();
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Unbinding...");
+        progressDialog.show();
+        cards.remove(position);
+        //notify adapter that chat room deleted so its delete it
+        cardAdapter.notifyItemRemoved(position);
+        //Toast.makeText(MyCards.this, "remove"+card.qrcode, Toast.LENGTH_LONG).show();
 
+        // start Retrofit call to delete chat room
+//            WebService.getInstance().getApi().deleteCard(cardID).enqueue(new Callback<MainResponse>() {
+//                @Override
+//                public void onResponse(Call<MainResponse> call, Response<MainResponse> response) {
+//                    if (response.body().status == 1) {
+//                        // toast message result
+//                        Toast.makeText(MyCards.this, response.body().message, Toast.LENGTH_SHORT).show();
+//                        // delete message from local chat room list which showed on adapter  now
+//                        cards.remove(position);
+//                        // notify adapter that chat room deleted so its delete it
+//                        cardAdapter.notifyItemRemoved(position);
+//
+//                    } else {
+//                        // toast message if status 0 it will be error
+//                        Toast.makeText(MyCards.this, response.body().message, Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(Call<MainResponse> call, Throwable t) {
+//                    // toast message of fail
+//                    Toast.makeText(MyCards.this, "Error: " + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+//
+//
+//                }
+//            });
+    }
+    }
 }

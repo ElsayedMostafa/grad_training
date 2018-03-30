@@ -50,6 +50,7 @@ public class QRScanner extends AppCompatActivity {
                 try{
                     if(ContextCompat.checkSelfPermission(QRScanner.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
                         cameraSource.start(cameraView.getHolder());
+
                     }
                 }
                 catch (IOException e){
