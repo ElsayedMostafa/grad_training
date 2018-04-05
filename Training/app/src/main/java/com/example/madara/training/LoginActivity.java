@@ -147,7 +147,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
-            login_pass.setError("between 4 and 10 alphanumeric characters");
+            login_pass.setError("Password between 4 and 10 alphanumeric characters");
             valid = false;
         } else {
             login_pass.setError(null);
@@ -159,7 +159,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mLoginCall.cancel();
+        //mLoginCall.cancel();
     }
 }
 

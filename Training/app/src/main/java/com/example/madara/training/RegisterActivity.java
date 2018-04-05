@@ -128,27 +128,27 @@ public class RegisterActivity extends AppCompatActivity {
         String repeat_password = re_password.getText().toString();
 
         if (name.isEmpty() || name.length() < 3) {
-            username.setError("at least 3 characters");
+            username.setError("Username should be at least 3 characters");
             valid = false;
         } else {
             username.setError(null);
         }
 
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            _email.setError("enter a valid email address");
+            _email.setError("Enter a valid email address");
             valid = false;
         } else {
             _email.setError(null);
         }
 
         if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
-            _password.setError("between 4 and 10 alphanumeric characters");
+            _password.setError("Password between 4 and 10 alphanumeric characters");
             valid = false;
         } else {
             _password.setError(null);
         }
         if (!password.equals(repeat_password)) {
-            re_password.setError("passwords not identical");
+            re_password.setError("Passwords not identical");
             valid = false;
         } else {
             re_password.setError(null);
@@ -160,6 +160,6 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mRegisterCall.cancel();
+        //mRegisterCall.cancel();
     }
 }

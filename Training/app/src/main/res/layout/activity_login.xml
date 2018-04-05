@@ -1,65 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.example.madara.training.MainActivity">
-
+    android:background="@color/background_color">
     <LinearLayout
+        android:layout_centerInParent="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp">
+        android:orientation="vertical"
+        tools:context="com.example.madara.training.MainActivity">
+
+            <EditText
+                android:id="@+id/et_login_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:hint="Enter your email"
+                android:textColorHint="@color/grey_light_color"
+                android:textSize="20sp"/>
+
+
+
+            <EditText
+                android:id="@+id/et_login_pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:inputType="textPassword"
+                android:hint="Enter your password"
+                android:textColorHint="@color/grey_light_color"
+                android:textSize="20sp"/>
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="16dp"
+            android:id="@+id/tv_forget_password"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Email" />
+            android:gravity="center"
+            android:textColor="@color/blue_color"
+            android:textSize="16sp"
+            android:text="Forget password" />
 
-        <EditText
-            android:id="@+id/et_login_email"
-            android:layout_width="0dp"
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2" />
-    </LinearLayout>
+            android:layout_margin="16dp"
+            android:text="Login"
+            android:background="@drawable/credential_button"
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp">
+            android:textColor="@color/white_color"
+            android:textAllCaps="false"/>
 
         <TextView
-            android:layout_width="0dp"
+            android:id="@+id/tv_dont_have_account"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Password" />
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="40dp"
+            android:gravity="center"
+            android:textColor="@color/blue_color"
+            android:textSize="16sp"
+            android:text="Don't have an account ? SIGNUP" />
 
-        <EditText
-            android:id="@+id/et_login_pass"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:inputType="textPassword" />
     </LinearLayout>
-
-    <Button
-        android:id="@+id/btn_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="Login" />
-
-    <TextView
-        android:id="@+id/tv_dont_have_account"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="40dp"
-        android:gravity="center"
-        android:text="Don't have an account ? SIGNUP" />
-
-</LinearLayout>
+</RelativeLayout>
