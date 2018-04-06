@@ -6,12 +6,17 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.madara.training.adapters.GarageAdapter;
 import com.example.madara.training.models.Garage;
 import com.example.madara.training.services.GPSService;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +32,11 @@ public class MainActivity extends AppCompatActivity {
     //Button _btn_getlocation;
     @BindView(R.id.mycard)
     Button _mycard;
+    @BindView(R.id.tv_tst) TextView testlocation;
     private final String TAG ="MainActivity";
     private GPSService locationObj;
     private Location mLocation;
+    ProgressBar progressBar;
 
 
     @Override
@@ -37,7 +44,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        locationObj = new GPSService(MainActivity.this,MainActivity.this);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        testlocation.setVisibility(View.INVISIBLE);
+        locationObj = new GPSService(MainActivity.this,MainActivity.this,mLocationCallback);
+        //locationObj.getLastLocation();
+
 //        _btn_getlocation.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -101,7 +112,27 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         locationObj.stopLocationUpdates();
     }
+    void startpost(){
+        testlocation.setVisibility(View.VISIBLE);
+    }
+    private LocationCallback mLocationCallback = new LocationCallback() {
+        @Override
+        public void onLocationResult(LocationResult locationResult) {
+            if (locationResult == null) {
+                Log.e(TAG,"null");
+                locationObj.startLocationUpdates();
+            }
+            for (Location location : locationResult.getLocations()) {
+                // Update UI with location data
+                // ...
+                mLocation = location;
+                testlocation.setVisibility(View.VISIBLE);
+                testlocation.setText(location.toString());
+                progressBar.setVisibility(View.GONE);
+                locationObj.stopLocationUpdates();
 
-
+            }
+        }
+    };
 
 }

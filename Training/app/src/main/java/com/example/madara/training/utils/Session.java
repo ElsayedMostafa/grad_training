@@ -67,4 +67,5 @@ public class Session {
         activity.startActivity(new Intent(activity, LoginActivity.class));
         activity.finish();
     }
+
 }

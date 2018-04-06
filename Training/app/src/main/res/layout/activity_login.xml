@@ -1,73 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color">
+
     <LinearLayout
-        android:layout_centerInParent="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:orientation="vertical"
+        android:layout_margin="16dp"
         tools:context="com.example.madara.training.MainActivity">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo3"/>
 
-            <EditText
-                android:id="@+id/et_login_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:hint="Enter your email"
-                android:textColorHint="@color/grey_light_color"
-                android:textSize="20sp"/>
+        <EditText
+            android:id="@+id/et_login_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your email"
+            android:textColorHint="@color/grey_light_color"
+            android:textSize="20sp" />
 
 
-
-            <EditText
-                android:id="@+id/et_login_pass"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:inputType="textPassword"
-                android:hint="Enter your password"
-                android:textColorHint="@color/grey_light_color"
-                android:textSize="20sp"/>
+        <EditText
+            android:id="@+id/et_login_pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Enter your password"
+            android:inputType="textPassword"
+            android:textColorHint="@color/grey_light_color"
+            android:textSize="20sp" />
 
         <TextView
-            android:layout_gravity="right"
-            android:layout_marginRight="16dp"
             android:id="@+id/tv_forget_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
             android:gravity="center"
+            android:text="Forget Password"
             android:textColor="@color/blue_color"
             android:textSize="16sp"
-            android:text="Forget password" />
+            android:clickable="true"/>
 
         <Button
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="Login"
             android:background="@drawable/credential_button"
-
-            android:textColor="@color/white_color"
-            android:textAllCaps="false"/>
+            android:text="Login"
+            android:layout_marginTop="16dp"
+            android:textAllCaps="false"
+            android:textColor="@color/white_color" />
 
         <TextView
+            android:layout_gravity="center"
             android:id="@+id/tv_dont_have_account"
-            android:layout_width="match_parent"
+            android:layout_marginTop="16dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="40dp"
             android:gravity="center"
+            android:text="Don't have an account ? SIGNUP"
             android:textColor="@color/blue_color"
             android:textSize="16sp"
-            android:text="Don't have an account ? SIGNUP" />
+            android:clickable="true"/>
 
     </LinearLayout>
 </RelativeLayout>

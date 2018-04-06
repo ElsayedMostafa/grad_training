@@ -90,9 +90,9 @@ public class LoginActivity extends AppCompatActivity {
                             user.id = response.body().user.id;
                             user.email = response.body().user.user_email;
                             Session.getInstance().startSession(user);
+                            progressDialog.cancel();
                             Intent goToMain = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(goToMain);
-                            progressDialog.cancel();
                             finish();
 
 
@@ -128,7 +128,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onLoginFailed() {
-        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
+        //Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
 
         _loginButton.setEnabled(true);
     }

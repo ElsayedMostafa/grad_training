@@ -26,6 +26,9 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static android.content.Context.LOCATION_SERVICE;
 
 /**
@@ -35,22 +38,22 @@ import static android.content.Context.LOCATION_SERVICE;
 public class GPSService  {
 
     private final String TAG ="GetMyLocation";
-    private Location mLastLocation;
+
+    private List<Location> mLastLocation =new ArrayList<Location>();
     private FusedLocationProviderClient mFusedLocationClient;
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
     private LocationManager mLocationManager;
-    //private LocationCallback mLocationCallback;
+    LocationCallback mLocationCallback;
     private Context context;
     private Activity activity;
     private LocationRequest mLocationRequest ;
+    LocationResult locationResult;
 
-
-
-    public GPSService(Context ctx , Activity act){
+    public GPSService(Context ctx , Activity act,LocationCallback l){
         this.context = ctx;
         this.activity = act;
+        this.mLocationCallback = l;
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(context);
-
 
     }
     public boolean checkPermissions() {
@@ -91,13 +94,7 @@ public class GPSService  {
             startLocationPermissionRequest();
         }
     }
-    public void showSnackbar(final int mainTextStringId, final int actionStringId,
-                             View.OnClickListener listener) {
-        Snackbar.make(this.activity.findViewById(android.R.id.content),
-                this.activity.getString(mainTextStringId),
-                Snackbar.LENGTH_INDEFINITE)
-                .setAction(this.activity.getString(actionStringId), listener).show();
-    }
+
     @SuppressLint("MissingPermission")
     public void getLastLocation() {
         if (checkGps()) {
@@ -106,11 +103,16 @@ public class GPSService  {
                         @Override
                         public void onComplete(@NonNull Task<Location> task) {
                             if (task.isSuccessful() && task.getResult() != null) {
-                                mLastLocation = task.getResult();
-
+                                //mLastLocation = task.getResult();
+                                //Log.e(TAG, task.getResult().toString());
+                                mLastLocation.add(task.getResult());
+                                locationResult = LocationResult.create(mLastLocation);
+                                Log.e(TAG, locationResult.toString());
+                                mLocationCallback.onLocationResult(locationResult);
 
                             } else {
                                 Log.w(TAG, "getLastLocation:exception", task.getException());
+                                startLocationUpdates();
 
                             }
                         }
@@ -120,24 +122,35 @@ public class GPSService  {
             showSettingsAlert();
         }
     }
-    public boolean checkGps(){
-        boolean isGPSEnabled = false;
-        boolean isNetworkEnabled = false;
-        mLocationManager = (LocationManager) context.getSystemService(LOCATION_SERVICE);
-        // getting GPS status
-        isGPSEnabled = mLocationManager
-                .isProviderEnabled(LocationManager.GPS_PROVIDER);
 
-        // getting network status
-        isNetworkEnabled = mLocationManager
-                .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
-        if (!isGPSEnabled && !isNetworkEnabled) {
-            return false;
+//    public Location getLocation(){
+//        Log.e(TAG,mLastLocation.toString());
+//        return this.mLastLocation;
+//    }
+
+
+    @SuppressLint("MissingPermission")
+    public void startLocationUpdates() {
+        if (checkGps()) {
+            createLocationRequest();
+            mFusedLocationClient.requestLocationUpdates(mLocationRequest,
+                    mLocationCallback,
+                    null /* Looper */);
         }
-        return true;
+        else {
+            showSettingsAlert();
+        }
     }
-
+    public void createLocationRequest() {
+        mLocationRequest = LocationRequest.create();
+        mLocationRequest.setInterval(10000);
+        mLocationRequest.setFastestInterval(5000);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+    }
+    public void stopLocationUpdates() {
+        mFusedLocationClient.removeLocationUpdates(mLocationCallback);
+    }
     public void showSettingsAlert(){
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
@@ -166,46 +179,30 @@ public class GPSService  {
         // Showing Alert Message
         alertDialog.show();
     }
-    public Location getLocation(){
-//        Log.e(TAG,mLastLocation.toString());
-        return this.mLastLocation;
+
+    public void showSnackbar(final int mainTextStringId, final int actionStringId,
+                             View.OnClickListener listener) {
+        Snackbar.make(this.activity.findViewById(android.R.id.content),
+                this.activity.getString(mainTextStringId),
+                Snackbar.LENGTH_INDEFINITE)
+                .setAction(this.activity.getString(actionStringId), listener).show();
+    }
+    public boolean checkGps(){
+        boolean isGPSEnabled = false;
+        boolean isNetworkEnabled = false;
+        mLocationManager = (LocationManager) context.getSystemService(LOCATION_SERVICE);
+        // getting GPS status
+        isGPSEnabled = mLocationManager
+                .isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+        // getting network status
+        isNetworkEnabled = mLocationManager
+                .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
+        if (!isGPSEnabled && !isNetworkEnabled) {
+            return false;
+        }
+        return true;
     }
 
-    private LocationCallback mLocationCallback = new LocationCallback() {
-        @Override
-        public void onLocationResult(LocationResult locationResult) {
-            if (locationResult == null) {
-                Log.e(TAG,"null");
-                startLocationUpdates();
-            }
-            for (Location location : locationResult.getLocations()) {
-                // Update UI with location data
-                // ...
-                mLastLocation = location;
-                stopLocationUpdates();
-                Log.e(TAG,location.toString());
-            }
-        }
-    };
-    @SuppressLint("MissingPermission")
-    public void startLocationUpdates() {
-        if (checkGps()) {
-            createLocationRequest();
-            mFusedLocationClient.requestLocationUpdates(mLocationRequest,
-                    mLocationCallback,
-                    null /* Looper */);
-        }
-        else {
-            showSettingsAlert();
-        }
-    }
-    public void createLocationRequest() {
-        mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(10000);
-        mLocationRequest.setFastestInterval(5000);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-    }
-    public void stopLocationUpdates() {
-        mFusedLocationClient.removeLocationUpdates(mLocationCallback);
-    }
 }
