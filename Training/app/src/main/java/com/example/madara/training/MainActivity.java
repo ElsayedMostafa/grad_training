@@ -1,7 +1,9 @@
 package com.example.madara.training;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.madara.training.adapters.GarageAdapter;
 import com.example.madara.training.models.Garage;
@@ -47,31 +50,24 @@ public class MainActivity extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         testlocation.setVisibility(View.INVISIBLE);
         locationObj = new GPSService(MainActivity.this,MainActivity.this,mLocationCallback);
-        //locationObj.getLastLocation();
 
-//        _btn_getlocation.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                mLocation = locationObj.getLocation();
-//                if(mLocation == null) {
-//                    Toast.makeText(MainActivity.this, "null", Toast.LENGTH_LONG).show();
-//                    //locationObj.getLastLocation();
-//                    //mLastLocation = locationObj.getLocation();
-//                    locationObj.startLocationUpdates();
-//
-//
-//                }
-//                else {
-//                    Toast.makeText(MainActivity.this, mLocation.toString(), Toast.LENGTH_LONG).show();
-//                }
-//            }
-//        });
-        //locationObj.startLocationUpdates();
-        //mLocation = locationObj.getLocation();
+
         _mycard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,MyCards.class));
+                //30.791026,30.999071
+                //startActivity(new Intent(MainActivity.this,MyCards.class));
+                PackageManager packageManager = getPackageManager();
+                Uri gmmIntentUri = Uri.parse("google.navigation:q=30.791026,30.999071");
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                if(mapIntent.resolveActivity(packageManager) != null){
+                    startActivity(mapIntent);
+                }
+                else{
+                    Toast.makeText(MainActivity.this,"Please install Google Maps",Toast.LENGTH_LONG).show();
+                }
+
             }
         });
         List<Garage> garagesList = new ArrayList<>();
@@ -98,9 +94,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(mLocation == null){
-            locationObj.startLocationUpdates();
-        }
+//        if(mLocation == null){
+//            locationObj.startLocationUpdates();
+//        }
     }
     @Override
     protected void onPause() {
@@ -111,9 +107,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy(){
         super.onDestroy();
         locationObj.stopLocationUpdates();
-    }
-    void startpost(){
-        testlocation.setVisibility(View.VISIBLE);
     }
     private LocationCallback mLocationCallback = new LocationCallback() {
         @Override
