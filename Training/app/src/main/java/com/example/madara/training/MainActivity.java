@@ -5,10 +5,13 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -39,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
     private final String TAG ="MainActivity";
     private GPSService locationObj;
     private Location mLocation;
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mActionBarDrawerToggle;
     ProgressBar progressBar;
 
 
@@ -48,6 +53,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+        mActionBarDrawerToggle = new ActionBarDrawerToggle(this,mDrawerLayout,R.string.open,R.string.close);
+        mDrawerLayout.addDrawerListener(mActionBarDrawerToggle);
+        mActionBarDrawerToggle.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         testlocation.setVisibility(View.INVISIBLE);
         locationObj = new GPSService(MainActivity.this,MainActivity.this,mLocationCallback);
 
@@ -80,6 +90,14 @@ public class MainActivity extends AppCompatActivity {
         GarageAdapter adapter = new GarageAdapter(garagesList);
         _recyclerView.setAdapter(adapter);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(mActionBarDrawerToggle.onOptionsItemSelected(item)){
+            return  true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

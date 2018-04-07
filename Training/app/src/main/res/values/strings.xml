@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">Parkino</string>
     <string name="textwarn">warn</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>
