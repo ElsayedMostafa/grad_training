@@ -16,11 +16,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashActivity" android:theme="@style/AppThemeNoAction">
-
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/AppThemeNoAction">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -28,15 +28,50 @@
             android:name=".MainActivity"
             android:label="main page" />
         <activity
-            android:theme="@style/AppThemeNoActiongreylight"
             android:name=".RegisterActivity"
-            android:label="Register" />
+            android:label="Register"
+            android:theme="@style/AppThemeNoActiongreylight" />
         <activity
-            android:theme="@style/AppThemeNoActiongreylight"
             android:name=".LoginActivity"
-            android:label="Login" />
-        <activity android:name=".MyCards" />
-        <activity android:name=".QRScanner" />
+            android:label="Login"
+            android:theme="@style/AppThemeNoActiongreylight" />
+        <activity android:name=".MyCards" android:label="My Cards" >
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
+        <activity android:name=".QRScanner" android:label="QR Code Scan" />
+        <activity android:name=".MyProfile" android:label="My Profile">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
+        <activity android:name=".MyGarages" android:label="My Garages">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
+        <activity android:name=".Charge" android:label="Charge">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
+        <activity android:name=".Settings" android:label="Settings">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
+        <activity android:name=".Help" android:label="Help">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
+        <activity android:name=".Sendfeedback" android:label="Send Feedback">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
+        <activity android:name=".About" android:label="About">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
+        <activity android:name=".Logout" android:label="Logout">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
     </application>
 
 </manifest>

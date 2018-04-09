@@ -2,20 +2,24 @@ package com.example.madara.training;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.madara.training.adapters.CardAdapter;
@@ -40,7 +44,7 @@ public class MyCards extends AppCompatActivity {
     private final String TAG = "MyCards";
     private Call<MainResponse> mBindCardCall;
     @BindView(R.id.btn_bindcard)
-    Button _btn_bind;
+    FloatingActionButton _btn_bind;
     @BindView(R.id.recyclerView_card)
     RecyclerView _recyclerCardView;
     public static final int REQUEST_CODE = 100;
@@ -128,14 +132,23 @@ public class MyCards extends AppCompatActivity {
 
     };
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_cards);
         // show user cards
         ButterKnife.bind(this);
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("com.package.ACTION_LOGOUT");
+        registerReceiver(new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Log.d("onReceive","Logout in progress");
+                //At this point you should start the login activity and finish this one
+                finish();
+            }
+        }, intentFilter);
+
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST);
         }

@@ -67,5 +67,11 @@ public class Session {
         activity.startActivity(new Intent(activity, LoginActivity.class));
         activity.finish();
     }
-
+    public void logoutsecurity(Activity activity){
+        if(!Session.getInstance().isUserLoggedIn()){
+            Intent intent = new Intent(activity,LoginActivity.class);
+            activity.startActivity(intent);
+            activity.finish();
+        }
+    }
 }

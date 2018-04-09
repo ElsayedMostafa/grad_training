@@ -10,14 +10,24 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp">
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
 
-        <ImageView
+        <!--<ImageView-->
+            <!--android:id="@+id/img_rfid_logo"-->
+            <!--android:layout_width="60dp"-->
+            <!--android:layout_height="60dp"-->
+            <!--android:src="@drawable/rfid" />-->
+        <TextView
             android:id="@+id/img_rfid_logo"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:src="@drawable/rfid" />
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:text="A"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textStyle="normal"
+            android:textColor="@color/white_color"
+            android:background="@drawable/circle_shape"/>
 
         <TextView
             android:id="@+id/tv_card_num"
@@ -25,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="10dp"
             android:layout_toEndOf="@+id/img_rfid_logo"
             android:layout_toRightOf="@id/img_rfid_logo"
             android:textSize="20sp"

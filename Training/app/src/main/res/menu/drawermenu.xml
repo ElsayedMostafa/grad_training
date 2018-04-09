@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-<item android:id="@+id/it_profile" android:title="Profile" android:icon="@drawable/ic_person_black_24dp"/>
-    <item android:id="@+id/it_cards" android:title="Cards" android:icon="@drawable/ic_aspect_ratio_black_24dp"/>
-    <item android:id="@+id/it_garages" android:title="My Garage" android:icon="@drawable/ic_my_location_black_24dp"/>
+<item android:id="@+id/it_profile" android:title="My profile" android:icon="@drawable/ic_person_black_24dp"/>
+    <item android:id="@+id/it_cards" android:title="My cards" android:icon="@drawable/ic_aspect_ratio_black_24dp"/>
+    <item android:id="@+id/it_garages" android:title="My garages" android:icon="@drawable/ic_my_location_black_24dp"/>
     <item android:id="@+id/it_charge" android:title="Charge" android:icon="@drawable/ic_attach_money_black_24px"/>
     <item android:id="@+id/it_settings" android:title="Settings" android:icon="@drawable/ic_settings_black_24px"/>
     <item android:id="@+id/it_help" android:title="Help" android:icon="@drawable/ic_help_black_24dp"/>
     <item android:id="@+id/it_feedback" android:title="Send feedback" android:icon="@drawable/ic_feedback_black_24dp"/>
-    <item android:id="@+id/it_bout" android:title="About" />
-    <item android:id="@+id/it_logout" android:title="Logout"/>
+    <item android:id="@+id/it_about" android:title="About" android:icon="@drawable/ic_info_black_24dp"/>
+    <item android:id="@+id/it_logout" android:title="Logout" android:icon="@drawable/ic_exit_to_app_black_24dp"/>
 
 </menu>

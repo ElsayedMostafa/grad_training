@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.madara.training.MyCards">
+    tools:context="com.example.madara.training.MyCards"
+    android:id="@+id/relative_mycard">
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView_card"
         android:layout_width="match_parent"
@@ -24,13 +25,16 @@
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
         android:orientation="vertical">
-        <Button
-            android:id="@+id/btn_bindcard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Bind Card"
-            android:textAllCaps="false"/>
-
     </LinearLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btn_bindcard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="24dp"
+        app:backgroundTint="@color/red_color"
+        android:src="@drawable/ic_add_black_24dp"
+        android:tint="@color/white_color"/>
 
 </RelativeLayout>
