@@ -26,7 +26,8 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:label="main page" />
+            android:label="Find garage"
+            android:theme="@style/findgarage"/>
         <activity
             android:name=".RegisterActivity"
             android:label="Register"

@@ -24,10 +24,11 @@
             android:theme="@style/progressBar" />
 
         <android.support.v7.widget.RecyclerView
+            android:background="@color/light2grey"
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="16dp"
+            android:overScrollMode="never"
             >
 
         </android.support.v7.widget.RecyclerView>

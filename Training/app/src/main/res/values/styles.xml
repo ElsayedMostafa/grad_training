@@ -7,23 +7,49 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="findgarage" parent="Theme.AppCompat.Light">
+
+        <item name="colorPrimary">@color/white_color</item>
+        <item name="colorPrimaryDark">@color/lightGrey</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="actionBarStyle">@style/MyActionBar</item>
+    </style>
+
     <style name="AppThemeNoAction" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/grey_dark_color</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
     <style name="AppThemeNoActiongreylight" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/blue_color</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
     <style name="progressBar">
         <item name="colorAccent">@color/red_color</item>
     </style>
+
     <style name="AppTheme_Dark_Dialog">
 
     </style>
 
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/duskYellow</item>
+        <item name="colorControlActivated">@color/lightGrey</item>
+    </style>
+
+    <style name="MyActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="background">@color/white_color</item>
+        <item name="titleTextStyle">@style/MyActionBarTitle</item>
+    </style>
+
+    <style name="MyActionBarTitle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/dark_black_color</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
 </resources>

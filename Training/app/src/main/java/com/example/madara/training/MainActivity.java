@@ -14,9 +14,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.example.madara.training.adapters.GarageAdapter;
@@ -39,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private Location mLocation;
     private DrawerLayout dl;
     private ActionBarDrawerToggle toggle;
+    private BroadcastReceiver broadcastReceiver;
     ProgressBar progressBar;
 
     @Override
@@ -48,18 +52,18 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("com.package.ACTION_LOGOUT");
-        registerReceiver(new BroadcastReceiver() {
+        broadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
                 Log.d("onReceive","Logout in progress");
                 //At this point you should start the login activity and finish this one
                 finish();
             }
-        }, intentFilter);
+        };
+        registerReceiver(broadcastReceiver, intentFilter);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         dl = (DrawerLayout) findViewById(R.id.drawer);
         toggle = new ActionBarDrawerToggle(this,dl,R.string.open,R.string.close);
-        dl.addDrawerListener(toggle);
         NavigationView nvDrawer = (NavigationView) findViewById(R.id.nav_view);
         toggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -86,7 +90,9 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
         List<Garage> garagesList = new ArrayList<>();
-        garagesList.add(new Garage(1, "firstgarage", "1k", "12:13"));
+        garagesList.add(new Garage(1, "Anwar Al Madinah", "0.6 km from centre", "12:13"));
+        garagesList.add(new Garage(1, "Anwar Al Madinah", "0.6 km from centre", "12:13"));
+        garagesList.add(new Garage(1, "Anwar Al Madinah", "0.6 km from centre", "12:13"));
 //        for (int i = 0; i < 200; i++) {
 //            garagesList.add(new Garage(1, "firstgarage", "1k", "12:13"));
 //        }
@@ -95,6 +101,28 @@ public class MainActivity extends AppCompatActivity {
         GarageAdapter adapter = new GarageAdapter(garagesList);
         _recyclerView.setAdapter(adapter);
 
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_search,menu);
+        MenuItem item = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) item.getActionView();
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String s) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String s) {
+//                adapter.getFilter().filter(s)
+//                return false;
+//            }
+//        });
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -130,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy(){
         super.onDestroy();
         locationObj.stopLocationUpdates();
+        unregisterReceiver(broadcastReceiver);
     }
     private LocationCallback mLocationCallback = new LocationCallback() {
         @Override
@@ -150,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
-public void selectItemDrawer(MenuItem menuItem){
+    public void selectItemDrawer(MenuItem menuItem){
 
     Class destionationClass = MainActivity.class;
     switch (menuItem.getItemId()){
@@ -208,4 +237,5 @@ public void selectItemDrawer(MenuItem menuItem){
             }
         });
     }
+
 }

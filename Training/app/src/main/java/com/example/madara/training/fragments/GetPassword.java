@@ -23,6 +23,7 @@ import butterknife.OnClick;
 
 public class GetPassword extends DialogFragment {
     private static final String TAG = "GetPasswordFragment";
+    //MyCards myCards = (MyCards) getActivity();
     @BindView(R.id.et_get_password)
     EditText _password;
     @BindView(R.id.btn_action_ok)
@@ -31,6 +32,7 @@ public class GetPassword extends DialogFragment {
     Button _cancel;
     @Nullable
     @Override
+
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_get_password,container,false);
         ButterKnife.bind(this,view);
@@ -43,13 +45,15 @@ public class GetPassword extends DialogFragment {
             case R.id.btn_action_cancel:
                 Log.d(TAG, "onClick: closing dialog");
                 getDialog().dismiss();
+                MyCards Cards = (MyCards) getActivity();
+                Cards.sendPassword("0",false,true);
                 break;
             case R.id.btn_action_ok:
                 String password = _password.getText().toString();
                 getDialog().dismiss();
                 MyCards myCards = (MyCards) getActivity();
                 boolean c = getArguments().getBoolean("num");
-                myCards.sendPassword(password,c);
+                myCards.sendPassword(password,c,false);
                 break;
         }
 

@@ -49,6 +49,7 @@ public class MyCards extends AppCompatActivity {
     RecyclerView _recyclerCardView;
     public static final int REQUEST_CODE = 100;
     public static final int PERMISSION_REQUEST = 200;
+    private BroadcastReceiver broadcastReceiver;
     private String mBarcode;
     private String mUserPassword;
     private CardAdapter cardAdapter;
@@ -73,6 +74,7 @@ public class MyCards extends AppCompatActivity {
             args.putInt("num", 0);
             getPassword.setArguments(args);
             getPassword.show(getFragmentManager(),"GetPassword");
+
             //cards.remove(position);
             // notify adapter that chat room deleted so its delete it
             //cardAdapter.notifyItemRemoved(position);
@@ -140,14 +142,15 @@ public class MyCards extends AppCompatActivity {
         ButterKnife.bind(this);
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("com.package.ACTION_LOGOUT");
-        registerReceiver(new BroadcastReceiver() {
+        broadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
                 Log.d("onReceive","Logout in progress");
                 //At this point you should start the login activity and finish this one
                 finish();
             }
-        }, intentFilter);
+        };
+        registerReceiver(broadcastReceiver, intentFilter);
 
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST);
@@ -276,14 +279,20 @@ public class MyCards extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         //mBindCardCall.cancel();
+        unregisterReceiver(broadcastReceiver);
     }
-public void sendPassword(String pass ,boolean c){
-        if (c){
-            bindNewCard(pass);
+public void sendPassword(String pass ,boolean c, boolean cancel){
+        if(cancel){
+            cardAdapter.notifyDataSetChanged();
         }
-        else{
-            removeCard(pass);
+        else {
+            if (c) {
+                bindNewCard(pass);
+            } else {
+                removeCard(pass);
+            }
         }
+
 }
 private void removeCard(String password){
     if(password.isEmpty()){

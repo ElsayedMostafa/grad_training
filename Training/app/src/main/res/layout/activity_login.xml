@@ -11,11 +11,14 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:orientation="vertical"
-        android:layout_margin="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
         tools:context="com.example.madara.training.MainActivity">
         <ImageView
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingBottom="24dp"
             android:src="@drawable/logo3"/>
 
         <EditText
