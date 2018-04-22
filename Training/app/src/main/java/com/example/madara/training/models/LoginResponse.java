@@ -23,6 +23,8 @@ public class LoginResponse {
         public String user_email;
         @SerializedName("user_password")
         public String password;
+        @SerializedName("phone_number")
+        public String phone_number;
 
     }
 }

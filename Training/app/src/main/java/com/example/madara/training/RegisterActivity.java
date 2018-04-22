@@ -34,6 +34,8 @@ public class RegisterActivity extends AppCompatActivity {
     EditText re_password;
     @BindView(R.id.btn_register)
     Button _signupButton;
+    @BindView(R.id.et_phone)
+    EditText _et_phone;
 
     //    @BindView(R.id.btn_register)
 //    Button register;
@@ -63,6 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
                 user.username = username.getText().toString();
                 user.email = _email.getText().toString();
                 user.password = _password.getText().toString();
+                user.phone_number = _et_phone.getText().toString();
                 mRegisterCall = WebService.getInstance().getApi().registerUser(user);
                 mRegisterCall.enqueue(new Callback<MainResponse>() {
                     @Override
@@ -126,12 +129,20 @@ public class RegisterActivity extends AppCompatActivity {
         String email = _email.getText().toString();
         String password = _password.getText().toString();
         String repeat_password = re_password.getText().toString();
+        String phoneNumber = _et_phone.getText().toString();
 
         if (name.isEmpty() || name.length() < 3) {
             username.setError("Username should be at least 3 characters");
             valid = false;
         } else {
             username.setError(null);
+        }
+        if(phoneNumber.isEmpty()||phoneNumber.length()!=11){
+            _et_phone.setError("Invalid phone number");
+            valid = false;
+        }
+        else{
+            _et_phone.setError(null);
         }
 
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {

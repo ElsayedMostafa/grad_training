@@ -15,5 +15,7 @@ public class User extends RealmObject{
     public String password;
     @SerializedName("email")
     public String email;
+    @SerializedName("phone_number")
+    public String phone_number;
     public int id;
 }
