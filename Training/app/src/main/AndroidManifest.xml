@@ -18,7 +18,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".SplashActivity"
-            android:theme="@style/AppThemeNoAction">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -27,15 +27,17 @@
         <activity
             android:name=".MainActivity"
             android:label="Find garage"
-            android:theme="@style/findgarage"/>
+            />
         <activity
+            android:theme="@style/AppThemeNoActiongreylight"
             android:name=".RegisterActivity"
             android:label="Register"
-            android:theme="@style/AppThemeNoActiongreylight" />
+             />
         <activity
+            android:theme="@style/AppThemeNoActiongreylight"
             android:name=".LoginActivity"
             android:label="Login"
-            android:theme="@style/AppThemeNoActiongreylight" />
+             />
         <activity android:name=".MyCards" android:label="My Cards" >
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity"/>

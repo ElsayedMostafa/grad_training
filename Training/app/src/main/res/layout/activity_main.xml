@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.madara.training.MainActivity"
+    android:overScrollMode="never"
     android:id="@+id/drawer">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -30,7 +31,6 @@
             android:layout_height="match_parent"
             android:overScrollMode="never"
             >
-
         </android.support.v7.widget.RecyclerView>
     </RelativeLayout>
     <android.support.design.widget.NavigationView
@@ -39,10 +39,11 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:background="@color/white_color"
-        app:itemTextColor="@color/dark_black_color"
+        app:itemTextColor="@color/grey_dark_color"
         app:itemIconTint="@color/grey_dark_color"
         app:menu="@menu/drawermenu"
         android:layout_gravity="start"
+        android:overScrollMode="never"
         >
     </android.support.design.widget.NavigationView>
 </android.support.v4.widget.DrawerLayout>
