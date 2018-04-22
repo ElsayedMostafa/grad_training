@@ -60,13 +60,13 @@ response 3>>
 request >> {"userid":2}
 response >>
 [{
-"card_id":12345666
+"card_id":1234123412341234
 },
 {
-"card_id":123456888
+"card_id":1234123412341234
 },
 {
-"card_id":123456777
+"card_id":1234123412341234
 }
 ]
 ============================================
@@ -95,6 +95,9 @@ response >>
 "longitude":"30.963"
 "image":"http://google.com/image.jpeg"
 "distance":"5K"
+"soltsnumber":10
+"price":5$
+"stars":3
 "emptyslots":"3"
 },
 {
@@ -105,6 +108,9 @@ response >>
 "longitude":"30.963"
 "image":"http://google.com/image.jpeg"
 "distance":"5K"
+"soltsnumber":10
+"price":5$
+"stars":3
 "emptyslots":"3"
 }
 ]
