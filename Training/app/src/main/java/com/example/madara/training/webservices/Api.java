@@ -21,12 +21,12 @@ import retrofit2.http.POST;
 
 public interface Api {
     @Headers("content-type: application/json")
-    //@POST("login")
-    @POST("login-user.php")
+    @POST("login")
+    //@POST("login-user.php")
     Call<LoginResponse> loginUser(@Body User user);
 
-    @POST("register-user.php")
-    //@POST("api/register")
+    //@POST("register-user.php")
+    @POST("register")
     Call<MainResponse> registerUser(@Body User user);
     @POST("bindcard")
     Call<MainResponse> bindCard(@Body Card card);

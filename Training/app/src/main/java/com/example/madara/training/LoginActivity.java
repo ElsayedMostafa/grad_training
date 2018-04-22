@@ -89,6 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                             user.username = response.body().user.user_name;
                             user.id = response.body().user.id;
                             user.email = response.body().user.user_email;
+                            user.phone_number = response.body().user.phone_number;
                             Session.getInstance().startSession(user);
                             progressDialog.cancel();
                             Intent goToMain = new Intent(LoginActivity.this, MainActivity.class);
