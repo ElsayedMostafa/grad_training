@@ -42,7 +42,7 @@
                 android:layout_height="18dp"
                 android:isIndicator="true"
                 android:numStars="5"
-                android:rating="5"
+                android:rating="4"
                 android:stepSize="0.1"
                 android:theme="@style/RatingBar" />
 
@@ -121,6 +121,7 @@
                     android:background="#FF4081"
                     android:fontFamily="@font/roboto"
                     android:textColor="@color/white_color"
+                    android:textAllCaps="false"
                     android:text="View"
                     />
             </RelativeLayout>
