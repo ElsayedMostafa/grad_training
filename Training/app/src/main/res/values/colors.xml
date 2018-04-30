@@ -29,5 +29,9 @@
     <color name="lightGrey">#d3d3d3</color>
     <color name="light2grey">#DDDCDC</color>
     <color name="foreground_material_dark">#6a3636</color>
+    <color  name="startblue">#09c6df</color>
+    <color  name="endtblue">#0bcce6</color>
+    <color name="cardview_initial_background">#71C3DE</color>
+
 
 </resources>

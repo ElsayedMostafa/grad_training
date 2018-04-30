@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 public class Rfid {
     @SerializedName("user_id")
     public int user_id;
-    @SerializedName("qrcode")
+    @SerializedName("card_no")
     public String mId;
     @SerializedName("created_at")
     public String created_at;

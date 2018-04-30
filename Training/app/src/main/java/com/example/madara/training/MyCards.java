@@ -31,7 +31,6 @@ import com.example.madara.training.utils.Session;
 import com.example.madara.training.webservices.WebService;
 import com.google.android.gms.vision.barcode.Barcode;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -155,15 +154,15 @@ public class MyCards extends AppCompatActivity {
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST);
         }
+//        _recyclerCardView.setLayoutManager(new LinearLayoutManager(this));
+//        cards = new ArrayList<Rfid>();
+//        cards.add(new Rfid("126578963214532"));
+//        cards.add(new Rfid("336698587544221"));
+//        cards.add(new Rfid("569874123655879"));
         _recyclerCardView.setLayoutManager(new LinearLayoutManager(this));
-        cards = new ArrayList<Rfid>();
-        cards.add(new Rfid("126578963214532"));
-        cards.add(new Rfid("336698587544221"));
-        cards.add(new Rfid("569874123655879"));
-        _recyclerCardView.setLayoutManager(new LinearLayoutManager(this));
-        cardAdapter = new CardAdapter(cards,MyCards.this);
-        _recyclerCardView.setAdapter(cardAdapter);
-        //getCards();
+//        cardAdapter = new CardAdapter(cards,MyCards.this);
+//        _recyclerCardView.setAdapter(cardAdapter);
+        getCards();
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipChatRoomCallBack);
         itemTouchHelper.attachToRecyclerView(_recyclerCardView);
 
@@ -262,6 +261,7 @@ public class MyCards extends AppCompatActivity {
                 //Log.e(TAG,response.body().toString());
                 cards = response.body();
                 //Log.e(TAG,cards.toString());
+                Log.e(TAG,cards.toString());
                 cardAdapter = new CardAdapter(cards,MyCards.this);
                 _recyclerCardView.setAdapter(cardAdapter);
                 progressDialog.cancel();

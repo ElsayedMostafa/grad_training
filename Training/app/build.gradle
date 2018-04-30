@@ -35,5 +35,6 @@ dependencies {
     compile 'com.google.android.gms:play-services-vision:12.0.0'
     compile 'com.google.android.gms:play-services:12.0.0'
     compile 'com.android.support:design:26.1.0'
+
 }
 apply plugin: 'realm-android'

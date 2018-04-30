@@ -3,4 +3,10 @@
     <string name="textwarn">warn</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="feedback_string">Please give us your feedback</string>
+    <string name="feedback_description">Your opinion is very important to us. We appreciate your feedback and will use it to evaluate changes and make improvements in our system. </string>
+    <string name="about_string">Parkino is a company that designs, manufactures, and constructs fully automated parking systems. This technology is designed to combat the growing problem of efficiently managing automobiles in areas where congestion, zoning and crime are problems and land is scarce and expensive.</string>
+
+
+
 </resources>
