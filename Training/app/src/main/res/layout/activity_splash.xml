@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.madara.training.SplashActivity"
-    android:background="@color/background_color">
+    android:background="@color/colorPrimary">
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:layout_centerInParent="true">
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/logo3"/>
+            android:layout_width="210dp"
+            android:layout_height="210dp"
+            android:src="@drawable/white_logo"/>
     </LinearLayout>
 </RelativeLayout>

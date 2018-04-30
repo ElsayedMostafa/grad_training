@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.madara.training.MainActivity"
     android:overScrollMode="never"
+    android:background="@color/background_color"
     android:id="@+id/drawer">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -25,7 +26,7 @@
             android:theme="@style/progressBar" />
 
         <android.support.v7.widget.RecyclerView
-            android:background="@color/light2grey"
+            android:background="@color/background_color"
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

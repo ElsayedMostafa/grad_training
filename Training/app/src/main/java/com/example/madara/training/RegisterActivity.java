@@ -2,17 +2,21 @@ package com.example.madara.training;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.madara.training.models.MainResponse;
 import com.example.madara.training.models.User;
 import com.example.madara.training.webservices.WebService;
+
+import java.lang.reflect.Type;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,6 +40,8 @@ public class RegisterActivity extends AppCompatActivity {
     Button _signupButton;
     @BindView(R.id.et_phone)
     EditText _et_phone;
+    @BindView(R.id.link_login)
+    TextView _link_login;
 
     //    @BindView(R.id.btn_register)
 //    Button register;

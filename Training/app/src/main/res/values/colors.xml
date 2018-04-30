@@ -8,10 +8,14 @@
     #102E37
 
     -->
-    <color name="colorPrimary">#2BBBD8</color>
-    <color name="colorPrimaryDark">#102E37</color>
-    <color name="colorAccent">#2BBBD8</color>
-    <color name="background_color">#fafafa</color>
+    <color name="colorPrimary">#2196F3</color>
+    <color name="colorPrimaryDark">#1976D2</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="lightprimarycolor">#BBDEFB</color>
+    <color name="dividercolor">#BDBDBD</color>
+    <color name="secondarytext">#757575</color>
+    <color name="primarytext">#212121</color>
+    <color name="background_color">#EBECED</color>
     <color name="green_color">#0eab68</color>
     <color name="blue_color">#5b83c2</color>
     <color name="blue_light_color">#488df5</color>
