@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle toggle;
     private BroadcastReceiver broadcastReceiver;
     ProgressBar progressBar;
+    private boolean action_bar = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +64,21 @@ public class MainActivity extends AppCompatActivity {
         registerReceiver(broadcastReceiver, intentFilter);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         dl = (DrawerLayout) findViewById(R.id.drawer);
-        toggle = new ActionBarDrawerToggle(this,dl,R.string.open,R.string.close);
+        toggle = new ActionBarDrawerToggle(this,dl,R.string.open,R.string.close){
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                getSupportActionBar().hide();
+
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+                getSupportActionBar().show();
+            }
+        };
+        dl.addDrawerListener(toggle); //to hide action bar
         NavigationView nvDrawer = (NavigationView) findViewById(R.id.nav_view);
         toggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -128,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(toggle.onOptionsItemSelected(item)){
+
             return  true;
         }
         return super.onOptionsItemSelected(item);
