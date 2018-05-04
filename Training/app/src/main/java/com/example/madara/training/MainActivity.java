@@ -21,10 +21,13 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.madara.training.adapters.GarageAdapter;
 import com.example.madara.training.models.Garage;
+import com.example.madara.training.models.GarageRequest;
 import com.example.madara.training.services.GPSService;
+import com.example.madara.training.webservices.WebService;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationResult;
 
@@ -33,6 +36,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 // api key AIzaSyBDxBh5UbBe6JjGiuD0bzTI1YmfhDTKq00
 public class MainActivity extends AppCompatActivity {
@@ -45,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
     private BroadcastReceiver broadcastReceiver;
     ProgressBar progressBar;
     private boolean action_bar = false;
+    private Call<List<Garage>> getGaragesCall;
+    private List<Garage> garages;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,15 +114,17 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
         List<Garage> garagesList = new ArrayList<>();
-        garagesList.add(new Garage(1, "Anwar Al Madinah", "0.6 km from centre", "12:13"));
-        garagesList.add(new Garage(1, "Anwar Al Madinah", "0.6 km from centre", "12:13"));
-        garagesList.add(new Garage(1, "Anwar Al Madinah", "0.6 km from centre", "12:13"));
+//        int id,String name, String lat, String lng,
+//                String image, String distance, int soltsnumber, String price, int stars, int emptyslots
+        String url = "https://images.pexels.com/photos/807598/pexels-photo-807598.jpeg?cs=srgb&dl=mobilechallenge-close-up-dew-807598.jpg&fm=jpg";
+        garagesList.add(new Garage("123","Anwar Al Madinah","30.36","30.31",url,"0.6 km from centre", "40 Slots","3P", 4f,9));
+
 //        for (int i = 0; i < 200; i++) {
 //            garagesList.add(new Garage(1, "firstgarage", "1k", "12:13"));
 //        }
         RecyclerView _recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         _recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        GarageAdapter adapter = new GarageAdapter(garagesList);
+        GarageAdapter adapter = new GarageAdapter(garagesList,this);
         _recyclerView.setAdapter(adapter);
 
 
@@ -229,6 +240,7 @@ public class MainActivity extends AppCompatActivity {
     }
     try {
         Intent i = new Intent(MainActivity.this,destionationClass);
+        //overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         startActivity(i);
 //        LayoutInflater inflater = getLayoutInflater();
 //        RelativeLayout container = (RelativeLayout) findViewById(R.id.inflate);
@@ -250,6 +262,26 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("here","here");
                 selectItemDrawer(item);
                 return true;
+            }
+        });
+    }
+
+    private void getGarages(String lng, String lat){
+        GarageRequest garagerequest = new GarageRequest();
+        garagerequest.latitude = lat;
+        garagerequest.longitude = lng;
+        getGaragesCall = WebService.getInstance().getApi().getGarages(garagerequest);
+        getGaragesCall.enqueue(new Callback<List<Garage>>() {
+            @Override
+            public void onResponse(Call<List<Garage>> call, Response<List<Garage>> response) {
+                //Log.e(TAG,response.body().toString());
+                garages = response.body();
+
+            }
+            @Override
+            public void onFailure(Call<List<Garage>> call, Throwable t) {
+                Toast.makeText(getBaseContext(), "Check Network Connection", Toast.LENGTH_LONG).show();
+
             }
         });
     }

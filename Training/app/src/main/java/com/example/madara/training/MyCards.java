@@ -31,6 +31,7 @@ import com.example.madara.training.utils.Session;
 import com.example.madara.training.webservices.WebService;
 import com.google.android.gms.vision.barcode.Barcode;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -73,7 +74,6 @@ public class MyCards extends AppCompatActivity {
             args.putInt("num", 0);
             getPassword.setArguments(args);
             getPassword.show(getFragmentManager(),"GetPassword");
-
             //cards.remove(position);
             // notify adapter that chat room deleted so its delete it
             //cardAdapter.notifyItemRemoved(position);
@@ -121,7 +121,7 @@ public class MyCards extends AppCompatActivity {
                 if (dX >= 0) {
                     //Log.e(TAG,"yes");
                     // set color for paint red color
-                    p.setColor(Color.parseColor("#ED1220"));
+                    p.setColor(Color.parseColor("#EBECED"));
                     // draw rectangle depending on the item view ends
                     c.drawRect((float) itemView.getLeft() , (float) itemView.getTop(),
                             (float) itemView.getLeft()+dX, (float) itemView.getBottom(), p);
@@ -155,14 +155,14 @@ public class MyCards extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST);
         }
 //        _recyclerCardView.setLayoutManager(new LinearLayoutManager(this));
-//        cards = new ArrayList<Rfid>();
-//        cards.add(new Rfid("126578963214532"));
-//        cards.add(new Rfid("336698587544221"));
-//        cards.add(new Rfid("569874123655879"));
+        cards = new ArrayList<Rfid>();
+        cards.add(new Rfid("126578963214532"));
+        cards.add(new Rfid("336698587544221"));
+        cards.add(new Rfid("569874123655879"));
         _recyclerCardView.setLayoutManager(new LinearLayoutManager(this));
-//        cardAdapter = new CardAdapter(cards,MyCards.this);
-//        _recyclerCardView.setAdapter(cardAdapter);
-        getCards();
+        cardAdapter = new CardAdapter(cards,MyCards.this);
+        _recyclerCardView.setAdapter(cardAdapter);
+        //getCards();
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipChatRoomCallBack);
         itemTouchHelper.attachToRecyclerView(_recyclerCardView);
 
@@ -200,7 +200,10 @@ public class MyCards extends AppCompatActivity {
     }
     private void bindNewCard(String password){
         if(password.isEmpty()){
+            cardAdapter.notifyDataSetChanged();
             Toast.makeText(this,"Empty Password !",Toast.LENGTH_SHORT).show();
+            return;
+
         }
         else {
             final ProgressDialog progressDialog = new ProgressDialog(MyCards.this);
@@ -297,6 +300,8 @@ public void sendPassword(String pass ,boolean c, boolean cancel){
 private void removeCard(String password){
     if(password.isEmpty()){
         Toast.makeText(this,"Empty Password !",Toast.LENGTH_SHORT).show();
+        cardAdapter.notifyDataSetChanged();
+
         //_recyclerCardView.setAdapter(cardAdapter);
         return;
     }
@@ -310,37 +315,41 @@ private void removeCard(String password){
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Unbinding...");
         progressDialog.show();
-        cards.remove(position);
-        //notify adapter that chat room deleted so its delete it
-        cardAdapter.notifyItemRemoved(position);
+        //cards.remove(position);
+        //cardAdapter.notifyItemRemoved(position);
         //Toast.makeText(MyCards.this, "remove"+card.qrcode, Toast.LENGTH_LONG).show();
 
         // start Retrofit call to delete chat room
-//            WebService.getInstance().getApi().deleteCard(cardID).enqueue(new Callback<MainResponse>() {
-//                @Override
-//                public void onResponse(Call<MainResponse> call, Response<MainResponse> response) {
-//                    if (response.body().status == 1) {
-//                        // toast message result
-//                        Toast.makeText(MyCards.this, response.body().message, Toast.LENGTH_SHORT).show();
-//                        // delete message from local chat room list which showed on adapter  now
-//                        cards.remove(position);
-//                        // notify adapter that chat room deleted so its delete it
-//                        cardAdapter.notifyItemRemoved(position);
-//
-//                    } else {
-//                        // toast message if status 0 it will be error
-//                        Toast.makeText(MyCards.this, response.body().message, Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//
-//                @Override
-//                public void onFailure(Call<MainResponse> call, Throwable t) {
-//                    // toast message of fail
-//                    Toast.makeText(MyCards.this, "Error: " + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-//
-//
-//                }
-//            });
+            WebService.getInstance().getApi().deleteCard(card).enqueue(new Callback<MainResponse>() {
+                @Override
+                public void onResponse(Call<MainResponse> call, Response<MainResponse> response) {
+                    if (response.body().status == 1) {
+                        // toast message result
+                        progressDialog.cancel();
+                        Toast.makeText(MyCards.this, response.body().message, Toast.LENGTH_SHORT).show();
+                        // delete message from local chat room list which showed on adapter  now
+                        cards.remove(position);
+                        // notify adapter that chat room deleted so its delete it
+                        cardAdapter.notifyItemRemoved(position);
+
+                    } else {
+                        // toast message if status 0 it will be error
+                        progressDialog.cancel();
+                        cardAdapter.notifyDataSetChanged();
+                        Toast.makeText(MyCards.this, response.body().message, Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<MainResponse> call, Throwable t) {
+                    // toast message of fail
+                    progressDialog.cancel();
+                    cardAdapter.notifyDataSetChanged();
+                    Toast.makeText(MyCards.this, "Error: " + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+
+
+                }
+            });
     }
     }
 }

@@ -1,6 +1,8 @@
 package com.example.madara.training.webservices;
 
 import com.example.madara.training.models.Card;
+import com.example.madara.training.models.Garage;
+import com.example.madara.training.models.GarageRequest;
 import com.example.madara.training.models.LoginResponse;
 import com.example.madara.training.models.MainResponse;
 import com.example.madara.training.models.Rfid;
@@ -33,5 +35,8 @@ public interface Api {
     @FormUrlEncoded
     @POST("getMyCards")
     Call<List<Rfid>> getCards(@Field("user_id") int user_id);
-
+    @POST("deleteCard")
+    Call<MainResponse> deleteCard(@Body Card card);
+    @POST("getGarages")
+    Call<List<Garage>> getGarages(@Body GarageRequest garageRequest);
 }
