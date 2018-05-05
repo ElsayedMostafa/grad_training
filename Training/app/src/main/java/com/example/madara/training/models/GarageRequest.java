@@ -7,6 +7,8 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class GarageRequest {
+    @SerializedName("user_id")
+    public int user_id;
     @SerializedName("latitude")
     public String latitude;
     @SerializedName("longitude")

@@ -86,12 +86,13 @@ response 1>>
 note >> you should check if the user have this card and password is correct before unbind it
 ===========================================
 << get Garages >>
-request >> {"latitude":"36.3658", "longitude":"30.963"}
+request >> {"userid":2, "latitude":"36.3658", "longitude":"30.963"}
 response >> 
 [{
-{
-"garage_id":12345666
+"garage_id":33
 "garage_name":"Anwar Al Madinah"
+"available":0 or 1
+"reserved":0 or 1
 "latitude":"36.3658"
 "longitude":"30.963"
 "image":"http://google.com/image.jpeg"
@@ -99,24 +100,9 @@ response >>
 "soltnumbers":"40 Slots"
 "price":"5P"
 "stars":3
-"emptyslots":3
+"emptyslots":"3"
 },
 {
-"garage_id":12345666
-"latitude":"36.3658"
-"longitude":"30.963"
-"image":"http://google.com/image.jpeg"
-"distance":"0.6km from centre"
-"soltnumbers":"40 Slots"
-"price":"5P"
-"stars":3
-"emptyslots":3
-}
-]
-<< get garage profile>>
-request >> {"userid":2, "garageid":33}
-{
-response >> {
 "garage_id":33
 "garage_name":"Anwar Al Madinah"
 "available":0 or 1
@@ -130,6 +116,7 @@ response >> {
 "stars":3
 "emptyslots":"3"
 }
+]
 
 
  

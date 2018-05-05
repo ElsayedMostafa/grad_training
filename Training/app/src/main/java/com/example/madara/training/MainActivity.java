@@ -27,6 +27,7 @@ import com.example.madara.training.adapters.GarageAdapter;
 import com.example.madara.training.models.Garage;
 import com.example.madara.training.models.GarageRequest;
 import com.example.madara.training.services.GPSService;
+import com.example.madara.training.utils.Session;
 import com.example.madara.training.webservices.WebService;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationResult;
@@ -268,6 +269,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void getGarages(String lng, String lat){
         GarageRequest garagerequest = new GarageRequest();
+        garagerequest.user_id =  Session.getInstance().getUser().id;
         garagerequest.latitude = lat;
         garagerequest.longitude = lng;
         getGaragesCall = WebService.getInstance().getApi().getGarages(garagerequest);
