@@ -19,7 +19,7 @@ public class Garage {
     public String image;
     @SerializedName("distance")
     public String distance;
-    @SerializedName("soltnumbers")
+    @SerializedName("slotnumbers")
     public String slotnumbers;
     @SerializedName("price")
     public String price;

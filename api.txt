@@ -97,7 +97,7 @@ response >>
 "longitude":"30.963"
 "image":"http://google.com/image.jpeg"
 "distance":"0.6km from centre"
-"soltnumbers":"40 Slots"
+"slotnumbers":"40 Slots"
 "price":"5P"
 "stars":3
 "emptyslots":"3"
@@ -111,7 +111,7 @@ response >>
 "longitude":"30.963"
 "image":"http://google.com/image.jpeg"
 "distance":"0.6km from centre"
-"soltnumbers":"40 Slots"
+"slotnumbers":"40 Slots"
 "price":"5P"
 "stars":3
 "emptyslots":"3"

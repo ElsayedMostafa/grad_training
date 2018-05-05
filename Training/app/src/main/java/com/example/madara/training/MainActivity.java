@@ -44,6 +44,7 @@ import retrofit2.Response;
 // api key AIzaSyBDxBh5UbBe6JjGiuD0bzTI1YmfhDTKq00
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.tv_tst) TextView testlocation;
+    @BindView(R.id.recyclerView) RecyclerView _recyclerView;
     private final String TAG ="MainActivity";
     private GPSService locationObj;
     private Location mLocation;
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean action_bar = false;
     private Call<List<Garage>> getGaragesCall;
     private List<Garage> garages;
+    private GarageAdapter garageAdapter;
 
 
     @Override
@@ -123,10 +125,11 @@ public class MainActivity extends AppCompatActivity {
 //        for (int i = 0; i < 200; i++) {
 //            garagesList.add(new Garage(1, "firstgarage", "1k", "12:13"));
 //        }
-        RecyclerView _recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        //RecyclerView _recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         _recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        GarageAdapter adapter = new GarageAdapter(garagesList,this);
-        _recyclerView.setAdapter(adapter);
+        //garageAdapter = new GarageAdapter(garagesList,this);
+        //_recyclerView.setAdapter(garageAdapter);
+        getGarages("36.3658","30.963");
 
 
     }
@@ -278,6 +281,8 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<List<Garage>> call, Response<List<Garage>> response) {
                 //Log.e(TAG,response.body().toString());
                 garages = response.body();
+                garageAdapter = new GarageAdapter(garages,MainActivity.this);
+                _recyclerView.setAdapter(garageAdapter);
 
             }
             @Override

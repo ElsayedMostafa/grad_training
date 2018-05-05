@@ -23,8 +23,8 @@ import retrofit2.http.POST;
 
 public interface Api {
     @Headers("content-type: application/json")
-    //@POST("login")
-    @POST("login-user.php")
+    @POST("login")
+    //@POST("login-user.php")
     Call<LoginResponse> loginUser(@Body User user);
 
     //@POST("register-user.php")
@@ -35,8 +35,8 @@ public interface Api {
     @FormUrlEncoded
     @POST("getMyCards")
     Call<List<Rfid>> getCards(@Field("user_id") int user_id);
-    @POST("deleteCard")
-    Call<MainResponse> deleteCard(@Body Card card);
+    @POST("unbindcard")
+    Call<MainResponse> unbindcard(@Body Card card);
     @POST("getGarages")
     Call<List<Garage>> getGarages(@Body GarageRequest garageRequest);
 }

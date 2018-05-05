@@ -31,7 +31,6 @@ import com.example.madara.training.utils.Session;
 import com.example.madara.training.webservices.WebService;
 import com.google.android.gms.vision.barcode.Barcode;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -155,14 +154,14 @@ public class MyCards extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST);
         }
 //        _recyclerCardView.setLayoutManager(new LinearLayoutManager(this));
-        cards = new ArrayList<Rfid>();
-        cards.add(new Rfid("126578963214532"));
-        cards.add(new Rfid("336698587544221"));
-        cards.add(new Rfid("569874123655879"));
+//        cards = new ArrayList<Rfid>();
+//        cards.add(new Rfid("126578963214532"));
+//        cards.add(new Rfid("336698587544221"));
+//        cards.add(new Rfid("569874123655879"));
         _recyclerCardView.setLayoutManager(new LinearLayoutManager(this));
-        cardAdapter = new CardAdapter(cards,MyCards.this);
-        _recyclerCardView.setAdapter(cardAdapter);
-        //getCards();
+//        cardAdapter = new CardAdapter(cards,MyCards.this);
+//        _recyclerCardView.setAdapter(cardAdapter);
+        getCards();
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipChatRoomCallBack);
         itemTouchHelper.attachToRecyclerView(_recyclerCardView);
 
@@ -320,7 +319,7 @@ private void removeCard(String password){
         //Toast.makeText(MyCards.this, "remove"+card.qrcode, Toast.LENGTH_LONG).show();
 
         // start Retrofit call to delete chat room
-            WebService.getInstance().getApi().deleteCard(card).enqueue(new Callback<MainResponse>() {
+            WebService.getInstance().getApi().unbindcard(card).enqueue(new Callback<MainResponse>() {
                 @Override
                 public void onResponse(Call<MainResponse> call, Response<MainResponse> response) {
                     if (response.body().status == 1) {
