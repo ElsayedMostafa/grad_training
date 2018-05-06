@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.madara.training.GarageProfile">
-    <ImageView
-        android:id="@+id/img_garage_profile_image"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager_garage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView

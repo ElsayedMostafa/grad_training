@@ -127,9 +127,9 @@ public class MainActivity extends AppCompatActivity {
 //        }
         //RecyclerView _recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         _recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        //garageAdapter = new GarageAdapter(garagesList,this);
-        //_recyclerView.setAdapter(garageAdapter);
-        getGarages("36.3658","30.963");
+        garageAdapter = new GarageAdapter(garagesList,this);
+        _recyclerView.setAdapter(garageAdapter);
+        //getGarages("36.3658","30.963");
 
 
     }
