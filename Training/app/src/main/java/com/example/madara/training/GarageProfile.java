@@ -2,14 +2,12 @@ package com.example.madara.training;
 
 import android.graphics.Point;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Display;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import java.util.Timer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,8 +15,14 @@ import butterknife.ButterKnife;
 public class GarageProfile extends AppCompatActivity {
     @BindView(R.id.viewpager_garage)
     ViewPager _viewpage_garage;
-    @BindView(R.id.tv_garage_profile_name)
-    TextView _garagename;
+//    @BindView(R.id.my_toolbar)
+//    Toolbar _toolbar;
+    private  Handler handler = new Handler();
+    private Timer timer;
+    int currentimage = 0;
+    final long DELAY_MS = 500;//delay in milliseconds before task is to be executed
+    final long PERIOD_MS = 3000; // time in milliseconds between successive task executions.
+
     private String[] imageUrls = new String[]{
             "https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg",
             "https://cdn.pixabay.com/photo/2017/12/21/12/26/glowworm-3031704_960_720.jpg",
@@ -31,6 +35,12 @@ public class GarageProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_garage_profile);
         ButterKnife.bind(this);
+//        _toolbar.setTitleTextAppearance(this,R.style.TitleTextApperance);
+//        _toolbar.setSubtitleTextAppearance(this,R.style.SubtitleTextApperance);
+//        _toolbar.setTitleMarginBottom(120);
+//        setSupportActionBar(_toolbar);
+//        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        //getSupportActionBar().setDisplayShowHomeEnabled(true);
         getIncomingIntent();
 
     }
@@ -47,10 +57,34 @@ public class GarageProfile extends AppCompatActivity {
         display.getSize(size);
         int width = size.x;
         int height = size.y;
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this, imageUrls,width,300);
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this, imageUrls,width,350);
         _viewpage_garage.setAdapter(viewPagerAdapter);
 
+//        final Runnable Update = new Runnable() {
+//            public void run() {
+//                if (currentimage == imageUrls.length-1) {
+//                    currentimage = 0;
+//                }
+//                _viewpage_garage.setCurrentItem(currentimage++, true);
+//            }
+//        };
+//
+//        timer = new Timer(); // This will create a new Thread
+//        timer .schedule(new TimerTask() { // task to be scheduled
+//
+//            @Override
+//            public void run() {
+//                handler.post(Update);
+//            }
+//        }, DELAY_MS, PERIOD_MS);
+
         getSupportActionBar().setTitle(name);
-        _garagename.setText(name);
+
+
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }
