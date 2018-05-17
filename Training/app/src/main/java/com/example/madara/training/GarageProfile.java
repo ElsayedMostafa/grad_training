@@ -3,9 +3,12 @@ package com.example.madara.training;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
+
+import com.example.madara.training.adapters.ProfilePageAdapter;
 
 import java.util.Timer;
 
@@ -15,6 +18,14 @@ import butterknife.ButterKnife;
 public class GarageProfile extends AppCompatActivity {
     @BindView(R.id.viewpager_garage)
     ViewPager _viewpage_garage;
+    @BindView(R.id.profile_viewpager) ViewPager _bottom_viewpager;
+    @BindView(R.id.profile_tab_layout)
+    TabLayout _profile_tab_layout;
+    //@BindView(R.id.profile_details) TabItem _profile_details;
+    //@BindView(R.id.profile_Reserve) TabItem _profile_reserve;
+    //@BindView(R.id.profile_map) TabItem _profile_map;
+
+
 //    @BindView(R.id.my_toolbar)
 //    Toolbar _toolbar;
     private  Handler handler = new Handler();
@@ -41,6 +52,13 @@ public class GarageProfile extends AppCompatActivity {
 //        setSupportActionBar(_toolbar);
 //        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 //        //getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        ProfilePageAdapter profilePageAdapter = new ProfilePageAdapter(getSupportFragmentManager(),_profile_tab_layout.getTabCount());
+        profilePageAdapter.addFragment(new DetailsFragment(),"Details");
+        profilePageAdapter.addFragment(new ReserveFragement(),"Reserve");
+        profilePageAdapter.addFragment(new MapFragment(),"Map");
+        _bottom_viewpager.setAdapter(profilePageAdapter);
+       _profile_tab_layout.setupWithViewPager(_bottom_viewpager);
         getIncomingIntent();
 
     }

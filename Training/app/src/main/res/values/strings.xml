@@ -7,5 +7,10 @@
     <string name="feedback_description">Your opinion is very important to us. We appreciate your feedback and will use it to evaluate changes and make improvements in our system. </string>
     <string name="about_string">Parkino is a company that designs, manufactures, and constructs fully automated parking systems. This technology is designed to combat the growing problem of efficiently managing automobiles in areas where congestion, zoning and crime are problems and land is scarce and expensive.</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+
 
 </resources>

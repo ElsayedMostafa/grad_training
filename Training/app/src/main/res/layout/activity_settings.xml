@@ -1,9 +1,161 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.madara.training.Settings">
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:weightSum="2"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    tools:context=".Settings">
 
-</android.support.constraint.ConstraintLayout>
+    <RelativeLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/person_icon"
+            android:scaleType="fitXY"
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/image_border"
+            android:contentDescription="Image Border"
+            android:padding="0dp"/>
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:clickable="true"
+            android:layout_margin="5dp"
+            android:background="@drawable/edit_states"
+            android:src="@drawable/ic_edit_black_24dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="@dimen/activity_vertical_margin">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/textview_border"
+                android:text="Willian Snoe"
+                android:textColor="@color/black_color"
+                android:paddingTop="6dp"
+                android:paddingBottom="8dp"
+                android:paddingLeft="6dp"
+                android:textSize="18sp"
+                android:gravity="center_vertical"/>
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:contentDescription="Edit image icon"
+                android:clickable="true"
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:src="@drawable/ic_edit_black_24dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="@dimen/activity_vertical_margin">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/textview_border"
+                android:text="Wiliam@gmail.com"
+                android:textColor="@color/black_color"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:paddingLeft="6dp"
+                android:textSize="18sp"
+                android:gravity="center_vertical"/>
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:contentDescription="Edit image icon"
+                android:clickable="true"
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:src="@drawable/ic_edit_black_24dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="@dimen/activity_vertical_margin">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/textview_border"
+                android:text="123456789"
+                android:inputType="textPassword"
+                android:textColor="@color/black_color"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:paddingLeft="6dp"
+                android:textSize="18sp"
+                android:gravity="center_vertical"/>
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:contentDescription="Edit image icon"
+                android:clickable="true"
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:src="@drawable/ic_edit_black_24dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="@dimen/activity_vertical_margin">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/textview_border"
+                android:text="+266 225 225"
+                android:textColor="@color/black_color"
+                android:paddingBottom="8dp"
+                android:paddingLeft="6dp"
+                android:textSize="18sp"
+                android:gravity="center_vertical"/>
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:contentDescription="Edit image icon"
+                android:clickable="true"
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:src="@drawable/ic_edit_black_24dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

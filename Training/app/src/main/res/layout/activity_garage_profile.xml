@@ -1,83 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/background_color"
+    android:fillViewport="true"
     tools:context="com.example.madara.training.GarageProfile">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <!--<android.support.v7.widget.Toolbar-->
-            <!--android:id="@+id/my_toolbar"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="94dp"-->
-            <!--android:background="?attr/colorPrimary"-->
-            <!--android:elevation="0dp"-->
-            <!--android:theme="@style/ThemeOverlay.AppCompat.ActionBar"-->
 
-            <!--&gt;-->
-        <!--</android.support.v7.widget.Toolbar>-->
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="@color/colorAccent">
-        </LinearLayout>
-        <android.support.v7.widget.CardView
-            android:layout_centerHorizontal="true"
-            android:layout_width="340dp"
-            android:layout_height="wrap_content">
-            <android.support.v4.view.ViewPager
-                android:id="@+id/viewpager_garage"
+            android:layout_height="match_parent"
+            android:background="@color/background_color"
+            android:orientation="vertical">
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="220dp" />
-            <LinearLayout
-                android:layout_marginTop="220dp"
-                android:layout_alignParentBottom="true"
-                android:layout_centerInParent="true"
-                android:layout_width="340dp"
-                android:layout_height="48dp"
-                android:weightSum="3"
-                android:orientation="horizontal">
-                <Button
-                    style="?android:attr/borderlessButtonStyle"
-                    android:background="@color/white_color"
-                    android:layout_width="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:text="Details"
-                    android:textAllCaps="false"
-                    android:fontFamily="@font/roboto"
-                    android:textColor="@color/grey_dark_color"
-                    />
-                <Button
-                    style="?android:attr/borderlessButtonStyle"
-                    android:background="@color/white_color"
-                    android:layout_width="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:text="Reserve"
-                    android:textAllCaps="false"
-                    android:fontFamily="@font/roboto"
-                    android:textColor="@color/grey_dark_color"
-                    />
-                <Button
-                    style="?android:attr/borderlessButtonStyle"
-                    android:background="@color/white_color"
-                    android:layout_width="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:text="Map"
-                    android:textAllCaps="false"
-                    android:fontFamily="@font/roboto"
-                    android:textColor="@color/grey_dark_color"
-                    />
+                android:layout_height="wrap_content">
 
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@color/colorAccent">
 
-    </RelativeLayout>
+                </LinearLayout>
 
-</LinearLayout>
+                <android.support.v7.widget.CardView
+                    android:layout_width="340dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true">
+
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/viewpager_garage"
+                        android:layout_width="match_parent"
+                        android:layout_height="220dp" />
+
+                    <android.support.design.widget.TabLayout
+                        android:id="@+id/profile_tab_layout"
+                        android:layout_width="340dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="220dp"
+                        android:background="@color/white_color"
+                        app:tabSelectedTextColor="@color/primarytext"
+                        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+                        app:tabTextColor="@color/secondarytext">
+
+
+                    </android.support.design.widget.TabLayout>
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/profile_viewpager"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="268dp">
+
+                    </android.support.v4.view.ViewPager>
+
+                </android.support.v7.widget.CardView>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </TableLayout>
+</ScrollView>

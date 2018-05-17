@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("com.package.ACTION_LOGOUT");
         broadcastReceiver = new BroadcastReceiver() {
@@ -95,6 +96,11 @@ public class MainActivity extends AppCompatActivity {
         toggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setupDrawerContent(nvDrawer);
+        View headerView = nvDrawer.getHeaderView(0);
+        TextView _user_name_nav = (TextView) headerView.findViewById(R.id.user_name_nav);
+        TextView _user_email_nav = (TextView) headerView.findViewById(R.id.user_email_nav);
+        _user_name_nav.setText(Session.getInstance().getUser().username);
+        _user_email_nav.setText(Session.getInstance().getUser().email);
         testlocation.setVisibility(View.INVISIBLE);
         locationObj = new GPSService(MainActivity.this,MainActivity.this,mLocationCallback);
 
@@ -158,7 +164,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(toggle.onOptionsItemSelected(item)){
-
             return  true;
         }
         return super.onOptionsItemSelected(item);
