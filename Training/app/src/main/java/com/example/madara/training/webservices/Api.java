@@ -7,6 +7,7 @@ import com.example.madara.training.models.LoginResponse;
 import com.example.madara.training.models.MainResponse;
 import com.example.madara.training.models.Rfid;
 import com.example.madara.training.models.User;
+import com.example.madara.training.models.UserProfileResponse;
 
 import java.util.List;
 
@@ -35,6 +36,9 @@ public interface Api {
     @FormUrlEncoded
     @POST("getMyCards")
     Call<List<Rfid>> getCards(@Field("user_id") int user_id);
+    @FormUrlEncoded
+    @POST("userProfileData")
+    Call<UserProfileResponse> getUserProfile(@Field("userid") int user_id);
     @POST("unbindcard")
     Call<MainResponse> unbindcard(@Body Card card);
     @POST("getGarages")

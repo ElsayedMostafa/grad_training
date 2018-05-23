@@ -9,6 +9,7 @@ response >>
         "user_name": "ahmed",
         "user_email": "ahmed@yahoo.com"
 	    "phone_number":01224132571
+
     }
 }
 ===============
@@ -126,6 +127,11 @@ response >>
     "status": 0,
     "message": "Wrong password"  
 }
+response >>
+{
+    "status": 0,
+    "message": "Enter new password"
+}
 response 1>>
 {
     "status": 1,
@@ -133,11 +139,11 @@ response 1>>
 }
 ======================================================
 << change username api >>
-request >> {"userid":2,"password":"123456","username":"mohamed"}
+request >> {"userid":2, username":"mohamed"}
 response >> 
 {
     "status": 0,
-    "message": "Wrong password"  
+    "message": "Failed"  
 }
 response 1>>
 {
@@ -146,12 +152,11 @@ response 1>>
 }
 ==============================================
 << change phonenumber api>> 
-request >> {"userid":2,"password":"123456","phone_number":"01224124376"}
-* be sure that user has entered a completely new password
+request >> {"userid":2, phone_number":"01224124376"}
 response >> 
 {
     "status": 0,
-    "message": "Wrong password"  
+    "message": "Failed"  
 }
 response 1>>
 {
@@ -161,19 +166,6 @@ response 1>>
 =======================================
 << user profile api >>
 request >> {"userid":2}
-response 0>>
-{
-    "status": 0,
-    "message": "error"
-    "user": {
-        "user_name": "",
-        "user_email": ""
-        "phone_number":00000000000
-        "points":0
-        "cards":0
-        "garages":0
-    }
-}
 response 1>>
 {
     "status": 1,
