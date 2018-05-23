@@ -8,7 +8,7 @@ response >>
         "user_id": 1,
         "user_name": "ahmed",
         "user_email": "ahmed@yahoo.com"
-	"phone_number":01224132571
+	    "phone_number":01224132571
     }
 }
 ===============
@@ -117,7 +117,76 @@ response >>
 "emptyslots":"3"
 }
 ]
-
+============================================
+<< change password api>> 
+request >> {"userid":2,"oldpassword":"123456","newpassword":"654321"}
+* be sure that user has entered a completely new password
+response >> 
+{
+    "status": 0,
+    "message": "Wrong password"  
+}
+response 1>>
+{
+    "status": 1,
+    "message": "Password changed Successfully" 
+}
+======================================================
+<< change username api >>
+request >> {"userid":2,"password":"123456","username":"mohamed"}
+response >> 
+{
+    "status": 0,
+    "message": "Wrong password"  
+}
+response 1>>
+{
+    "status": 1,
+    "message": "Name changed Successfully" 
+}
+==============================================
+<< change phonenumber api>> 
+request >> {"userid":2,"password":"123456","phone_number":"01224124376"}
+* be sure that user has entered a completely new password
+response >> 
+{
+    "status": 0,
+    "message": "Wrong password"  
+}
+response 1>>
+{
+    "status": 1,
+    "message": "phone number changed Successfully" 
+}
+=======================================
+<< user profile api >>
+request >> {"userid":2}
+response 0>>
+{
+    "status": 0,
+    "message": "error"
+    "user": {
+        "user_name": "",
+        "user_email": ""
+        "phone_number":00000000000
+        "points":0
+        "cards":0
+        "garages":0
+    }
+}
+response 1>>
+{
+    "status": 1,
+    "message": "sucess"
+    "user": {
+        "user_name": "ahmed",
+        "user_email": "ahmed@yahoo.com"
+        "phone_number":01224132571
+        "points":200
+        "cards":3
+        "garages":2
+    }
+}
 
  
 
