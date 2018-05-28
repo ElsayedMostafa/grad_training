@@ -268,7 +268,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 //Toast.makeText(MainActivity.this,"here",Toast.LENGTH_LONG).show();
-                Log.e("here","here");
                 selectItemDrawer(item);
                 return true;
             }
@@ -285,10 +284,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Garage>> call, Response<List<Garage>> response) {
                 //Log.e(TAG,response.body().toString());
-                garages = response.body();
-                garageAdapter = new GarageAdapter(garages,MainActivity.this);
-                _recyclerView.setAdapter(garageAdapter);
-
+                try {
+                    garages = response.body();
+                    garageAdapter = new GarageAdapter(garages, MainActivity.this);
+                    _recyclerView.setAdapter(garageAdapter);
+                }catch (Exception e){
+                    Log.e(TAG,"failed to get garages");
+                }
             }
             @Override
             public void onFailure(Call<List<Garage>> call, Throwable t) {

@@ -120,7 +120,7 @@ response >>
 ]
 ============================================
 << change password api>> 
-request >> {"userid":2,"oldpassword":"123456","newpassword":"654321"}
+request >> {"userid":2,"oldpassword":"123456","password":"654321"}
 * be sure that user has entered a completely new password
 response >> 
 {
@@ -150,6 +150,19 @@ response 1>>
     "status": 1,
     "message": "Name changed Successfully" 
 }
+==================
+<< change email api>> 
+request >> {"userid":2, "email":"ahmed@yahoo.com", password:"653432" }
+response >> 
+{
+    "status": 0,
+    "message": "Failed"  
+}
+response 1>>
+{
+    "status": 1,
+    "message": "Email changed Successfully" 
+}
 ==============================================
 << change phonenumber api>> 
 request >> {"userid":2, phone_number":"01224124376"}
@@ -161,7 +174,7 @@ response >>
 response 1>>
 {
     "status": 1,
-    "message": "phone number changed Successfully" 
+    "message": "Phone number changed Successfully" 
 }
 =======================================
 << user profile api >>

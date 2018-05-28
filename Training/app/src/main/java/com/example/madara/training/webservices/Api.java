@@ -24,8 +24,8 @@ import retrofit2.http.POST;
 
 public interface Api {
     @Headers("content-type: application/json")
-    @POST("login")
-    //@POST("login-user.php")
+    //@POST("login")
+    @POST("login-user.php")
     Call<LoginResponse> loginUser(@Body User user);
 
     //@POST("register-user.php")
@@ -43,4 +43,13 @@ public interface Api {
     Call<MainResponse> unbindcard(@Body Card card);
     @POST("getGarages")
     Call<List<Garage>> getGarages(@Body GarageRequest garageRequest);
+    //edit user information
+    @POST("changename")
+    Call<MainResponse> changeName(@Body User user);
+    @POST("changeemail")
+    Call<MainResponse> changeEmail(@Body User user);
+    @POST("changepassword")
+    Call<MainResponse> changePassword(@Body User user);
+    @POST("changephone")
+    Call<MainResponse> changePhone(@Body User user);
 }
