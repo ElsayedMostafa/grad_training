@@ -21,6 +21,7 @@
             android:layout_width="99dp"
             android:layout_height="76dp"
             android:src="@drawable/rf_cards_and_supplies" />
+
         <TextView
             android:id="@+id/tv_card_num"
             android:layout_width="match_parent"
@@ -43,5 +44,5 @@
         android:layout_alignParentRight="true"
         android:layout_width="72dp"
         android:layout_height="20dp"
-        android:src="@drawable/sqr_logo_white_cut"/>
+        android:src="@drawable/white_logo"/>
 </RelativeLayout>
