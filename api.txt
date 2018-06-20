@@ -1,5 +1,5 @@
 <<login api>>
-request >>  {"username":"ahmed","password":"123456","email":"ahmed@yahoo.com"}
+request >>  {password":"123456","email":"ahmed@yahoo.com"}
 response >> 
 {
     "status": 1,
@@ -220,27 +220,58 @@ response >> [{
 }
 =======================
 << reserve garage >> 
-request >> {"user_id":2, garage_id:5060}
+request >> {"user_id":2, garage_id:"5060", "password":"123456"}
 response >> 
-response 0>>
-{
-    "status": 0,
-    "message": "Reserverd Successfully"    
-}
 response 1>>
 {
     "status": 1,
+    "message": "Reserverd Successfully"    
+}
+response 0>>
+{
+    "status": 0,
     "message": "You don't have enough points"  or "No Slot Available"  or "You Already Reserved"  or "Failed"
 }
 =========================
+<< cancel reserve >>
+request >> {}
+=========================
+<< search garage >> 
+request >> {search_text:"anware", "latitude":"36.3658", "longitude":"30.963"}
+response >> 
+[{
+"garage_id":33
+"garage_name":"Anwar Al Madinah"
+"latitude":"36.3658"
+"longitude":"30.963"
+"image":"http://google.com/image.jpeg"
+"slotnumbers":"40 Slots"
+"price":"5P"
+"stars":3
+"emptyslots":"3"
+},
+{
+"garage_id":33
+"garage_name":"Anwar Al Madinah"
+"latitude":"36.3658"
+"longitude":"30.963"
+"image":"http://google.com/image.jpeg"
+"slotnumbers":"40 Slots"
+"price":"5P"
+"stars":3
+"emptyslots":"3"
+}]
+>> return empty list if there is no garages && don't return the reserved garages by this user in search results
+
+=========================
 << charge >> 
 request >> {"user_id":2, amount_id:6060, credit_number:12356486}
-response 0>>
+response 1>>
 {
     "status": 0,
     "message": "Charged Successfully"    
 }
-response 1>>
+response 0>>
 {
     "status": 1,
     "message": "You don't have enough Money"  or "Invaild Credit Number"  or "Failed"  

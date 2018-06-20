@@ -16,7 +16,7 @@ public class Logout extends AppCompatActivity {
         Intent broadcastIntent = new Intent();
         broadcastIntent.setAction("com.package.ACTION_LOGOUT");
         sendBroadcast(broadcastIntent);
-        Session.getInstance().logoutsecurity(this);
+            Session.getInstance().logoutsecurity(this);
             final ProgressDialog progressDialog = new ProgressDialog(Logout.this);
             progressDialog.setIndeterminate(true);
             progressDialog.setMessage("Logout...");
@@ -24,7 +24,5 @@ public class Logout extends AppCompatActivity {
             Session.getInstance().logoutAndGoToLogin(Logout.this);
             progressDialog.cancel();
             finish();
-
-
     }
 }
