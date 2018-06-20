@@ -237,7 +237,7 @@ response 0>>
 request >> {}
 =========================
 << search garage >> 
-request >> {search_text:"anware", "latitude":"36.3658", "longitude":"30.963"}
+request >> {"user_id":123 search_text:"anware", "latitude":"36.3658", "longitude":"30.963"}
 response >> 
 [{
 "garage_id":33
